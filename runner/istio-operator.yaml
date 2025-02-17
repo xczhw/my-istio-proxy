@@ -1,0 +1,9 @@
+apiVersion: install.istio.io/v1alpha1
+kind: IstioOperator
+metadata:
+  name: istio-custom
+spec:
+  meshConfig:
+    defaultConfig:
+      proxyMetadata:
+        ISTIO_LOG_LEVEL: debug
