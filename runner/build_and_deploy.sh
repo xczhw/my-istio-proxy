@@ -17,7 +17,7 @@ make docker.push TAGS=1.24-dev
 
 # 安装 Istio
 # echo "Installing Istio..."
-# /mydata/istio/istio/out/linux_amd64/istioctl install -f /mydata/istio-testing/work/runner/istio-operator.yaml -y
+/mydata/istio/istio/out/linux_amd64/istioctl install -f /mydata/istio-testing/work/runner/istio-operator.yaml -y
 
 
 # 重新部署 whoami 服务

@@ -1,40 +1,8 @@
 apiVersion: install.istio.io/v1alpha1
 kind: IstioOperator
-metadata:
-  name: istio-control-plane
 spec:
-  profile: demo  # 设置安装 profile
-  hub: node0:5000  # 自定义镜像仓库
-  meshConfig:
-    defaultConfig:
-      proxyMetadata:
-        ISTIO_LOG_LEVEL: debug  # 设置日志级别
-
-  components:
-    pilot:
-      k8s:
-        env:
-          - name: PILOT_LOG_LEVEL
-            value: debug
-          - name: ISTIO_LOG_LEVEL
-            value: debug
-        overlays:
-          - kind: Deployment
-            name: istiod
-            patches:
-              - path: spec.template.spec.containers[0].imagePullPolicy
-                value: Always
-
-    ingressGateways:
-      - name: istio-ingressgateway
-        enabled: true
-        k8s:
-          env:
-            - name: ISTIO_LOG_LEVEL
-              value: debug
-          overlays:
-            - kind: Deployment
-              name: istio-ingressgateway
-              patches:
-                - path: spec.template.spec.containers[0].imagePullPolicy
-                  value: Always
+  profile: demo
+  hub: node0:5000
+  values:
+    global:
+      imagePullPolicy: Always
