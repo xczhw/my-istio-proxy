@@ -1,0 +1,16 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: EnvoyFilter
+metadata:
+  name: custom-lb-whoami
+  namespace: test  # 需要和 whoami 服务在同一个命名空间
+spec:
+  configPatches:
+  - applyTo: CLUSTER
+    match:
+      context: ANY
+      cluster:
+        service: whoami.test.svc.cluster.local  # 确保这个是你的目标服务
+    patch:
+      operation: MERGE
+      value:
+        lb_policy: CUSTOMIZED  # 直接设置 lb_policy 为 CUSTOMIZED，传递给 Envoy
