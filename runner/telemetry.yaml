@@ -1,0 +1,9 @@
+apiVersion: telemetry.istio.io/v1alpha1
+kind: Telemetry
+metadata:
+  name: enable-tracing
+spec:
+  tracing:
+  - providers:
+    - name: jaeger
+    randomSamplingPercentage: 100.0
