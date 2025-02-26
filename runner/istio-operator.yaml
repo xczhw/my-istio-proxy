@@ -1,8 +1,17 @@
 apiVersion: install.istio.io/v1alpha1
 kind: IstioOperator
+metadata:
+  namespace: istio-system
+  name: istio-controlplane
 spec:
   profile: demo
   hub: node0:5000
   values:
     global:
       imagePullPolicy: Always
+  meshConfig:
+    defaultConfig:
+      tracing:
+        sampling: 100
+        zipkin:
+          address: jaeger-collector.istio-system.svc.cluster.local:9411
