@@ -16,11 +16,12 @@ echo "Building Istio Docker image..."
 cd /mydata/istio/istio
 rm -f /mydata/istio/istio/out/istio_is_init
 make docker.push TAGS=1.24-dev
+mv /mydata/istio/istio/out/linux_amd64/istioctl /usr/local/bin/istioctl
 
 # 安装 Istio
 # echo "Installing Istio..."
-/mydata/istio/istio/out/linux_amd64/istioctl install -f /mydata/istio-testing/work/runner/istio-operator.yaml -y
-
+istioctl install -f /mydata/istio-testing/work/runner/istio-operator.yaml -y
+kubectl apply -f /mydata/istio-testing/work/runner/addons
 
 # 重新部署 whoami 服务
 echo "Redeploying whoami service..."
